@@ -19,7 +19,10 @@
                 </v-row>
             </v-card-text>
             <v-card-actions>
-                <v-btn color="primary" width="100%" @click="register_teacher()">
+                <v-btn color="primary" width="50%" @click="login_teacher()">
+                    Login
+                </v-btn>
+                <v-btn color="primary" width="50%" @click="register_teacher()">
                     Register
                 </v-btn>
             </v-card-actions>
@@ -48,7 +51,15 @@ export default {
                 repeat_password: "Admin123!",
             };
             var response = await this.store.register_teacher(obj);
-            console.log(response);
+            console.log(this.store.error);
+        },
+
+        async login_teacher() {
+            var obj = {
+                email: "paul1@gmail.com",
+                password: "Admin123!",
+            };
+            var response = await this.store.login_teacher(obj);
             console.log(this.store.error);
         },
     },

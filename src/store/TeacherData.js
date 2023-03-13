@@ -21,15 +21,27 @@ export const TeacherData = defineStore("TeacherData", {
                 const result = await teacher_API.prototype.register_teacher(
                     teacher
                 );
-                localStorage.setItem(
-                    "token",
-                    JSON.stringify(result.data.access_token)
+                this.loading = false;
+                this.error = null;
+                return true;
+            } catch (error) {
+                this.error = error.response.data.detail;
+                this.loading = false;
+            }
+        },
+
+        async login_teacher(teacher) {
+            try {
+                this.loading = true;
+                const result = await teacher_API.prototype.login_teacher(
+                    teacher
                 );
                 this.loading = false;
                 this.error = null;
-                return result;
+                return true;
             } catch (error) {
-                this.error = error;
+                console.log(error);
+                this.error = error.response.data.detail;
                 this.loading = false;
             }
         },
